@@ -1,4 +1,5 @@
 import collections
+import csv
 import glob
 import numpy as np
 import os
@@ -133,16 +134,15 @@ if __name__ == '__main__':
     if args.msa_file:
         _, ext = os.path.splitext(args.msa_file)
         if ext == '.a3m':
-            seq = parse_fasta_a3m(args.msa_file)
+            sequences = parse_fasta_a3m(args.msa_file)
         elif ext == '.fasta':
-            seq = parse_fasta_a3m(args.msa_file, a3m=False)
+            sequences = parse_fasta_a3m(args.msa_file, a3m=False)
         elif ext == '.sto':
-            seq = parse_stockholm(args.msa_file)
+            sequences = parse_stockholm(args.msa_file)
         elif ext == '.hhr':
-            seq = parse_hhr(args.msa_file)
+            sequences = parse_hhr(args.msa_file)
         else:
             raise ValueError('Unsupported MSA format')
-        sequences = [seq]
     elif args.af_dir:
         af2_msas = glob.glob(os.path.join(args.af_dir, 'msas', '*'))
         sequences = []
@@ -159,10 +159,15 @@ if __name__ == '__main__':
         
     neff = calculate_neff(sequences, seq_id=args.seq_id)
 
-    print(f"Neff = {neff}")
+    print(f"Neff = {np.round(neff, 2)}")
     if args.input_seq:
         with open(args.input_seq, 'r') as f:
             next(f)
             seq_length = len(f.read().replace('\n', ''))
-        print(f"Neff/len = {neff/seq_length}")
+        print(f"Neff/len = {np.round(neff/seq_length, 2)}")
     print(f"Total sequences = {len(sequences)}")
+
+    with open('neff.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Neff", "Neff/len", "Total sequences"])
+        writer.writerow([neff, neff/seq_length if args.input_seq else '', len(sequences)])
