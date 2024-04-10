@@ -1,6 +1,10 @@
 # Neff Calculation Script
 
-This script calculates the effective number of sequences (Neff) from a multiple sequence alignment (MSA) file.
+This script calculates the effective number of sequences (Neff) from a multiple sequence alignment (MSA) file using the following equation:
+
+$$ Neff = \sum_{i=1}^{N} {1 \over weight_{i}} $$
+
+where $N$ is the number of sequences in the MSA. For each sequence $i$, $weight_{i}$ is the sum of $weight_{ij}$ over all sequences in the MSA, while $weight_{ij}$ is the sequence identity between any homologous sequence $i$ and $j$ in the MSA. The minimum sequence identity between $i$ and $j$ is set to 80% by default but can be defined by the user (see below).
 
 ## Requirements
 
