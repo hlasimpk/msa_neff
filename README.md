@@ -16,7 +16,7 @@ where $N$ is the number of sequences in the MSA. For each sequence $i$, $weight_
 - `--msa_file`: Path to an MSA file. Supported formats are `.a3m`, `.fasta`, `.sto`, and `.hhr`.
 - `--af_dir`: Path to an AlphaFold2 output directory. This will automatically find the MSA files and calculate the total number of sequences/Neff.
 - `--cf_dir`: Path to a ColabFold output directory. This will automatically find the MSA file and calculate the total number of sequences/Neff.
-- `--seq_id`: Optional: Sequence identity threshold for calculating Neff. The default is `0.8` in line with the value used in the AlphaFold2 paper ([Jumper *et al.* 2021](https://doi.org/10.1038/s41586-021-03819-2))/ However, be aware that other thresholds are also used: e.g. `0.62` ([Wu *et al.* 2020](https://doi.org/10.1093/bioinformatics/btz679)).
+- `--seq_id`: Optional: Sequence identity threshold for calculating Neff. The default is `0.8` in line with the 80% value used in the AlphaFold2 paper ([Jumper *et al.* 2021](https://doi.org/10.1038/s41586-021-03819-2)). However, be aware that other thresholds are also used: e.g. `0.62` ([Wu *et al.* 2020](https://doi.org/10.1093/bioinformatics/btz679)).
 - `--input_seq`: Optional: The input sequence used to calculate the MSA (fasta format). This is used to calculate the Neff/length.
 
 ## Usage
